@@ -46,20 +46,21 @@ client.on('message', async message => {
     if(message.content.includes('!tiempo')){
         let city = message.content.split('!tiempo ')[1];
         let options = {
-            url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ce46f59c8c79704a018239066279614`,
+            url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=0ce46f59c8c79704a018239066279614`,
             method: 'GET'
         }
         
         await request(options, (err, response, body) => {
             if(!err && response.statusCode == 200){                
                 let result = JSON.parse(body);
+                console.log(result);
                 const embed = new MessageEmbed()
                 .setColor(0xff0000)
                 .setTitle(`Tiempo en ${result.name}`)
-                .addField('Temperatura', (result.main.temp/10).toFixed(2) + '°')
-                .addField('RealFeel', (result.main.feels_like/10).toFixed(2) + '°')
-                .addField('Min', (result.main.temp_min/10).toFixed(2) + '°')
-                .addField('Max', (result.main.temp_max/10).toFixed(2) + '°')
+                .addField('Temperatura', result.main.temp + '°')
+                .addField('RealFeel', result.main.feels_like + '°')
+                .addField('Min', result.main.temp_min + '°')
+                .addField('Max', result.main.temp_max + '°')
                 .addField('Precion', result.main.pressure + ' hPa')
                 .addField('Humedad', result.main.humidity + '%');
                 message.channel.send(embed);
