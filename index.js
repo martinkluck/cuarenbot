@@ -6,6 +6,18 @@ const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const app = express()
+
+app.use(express.json())
+app.use(express.urlencoded())
+
+app.get("/", (req,res) => {
+    res.send(" Discord Coronabot")
+})
+app.listen(80,()=>{
+    console.log("Servidor web levantado")
+})
+
 const axios = require('axios');
 const { Client, MessageEmbed, BroadcastDispatcher} = require('discord.js');
 const client = new Client();
