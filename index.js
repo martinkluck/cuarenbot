@@ -1,4 +1,7 @@
 const request = require('request');
+const path = require('path');
+const http = require('http');
+const express = require('express');
 const axios = require('axios');
 const { Client, MessageEmbed, BroadcastDispatcher} = require('discord.js');
 const client = new Client();
@@ -100,4 +103,4 @@ client.on('message', async message => {
     }
 })
 
-client.login('NjkzMjEzMDY5MDcyOTI0ODEy.Xn5zEQ.QWrLDYcYIETnyuyqxUPwD8qTzxw');
+client.login('NjkzMjEzMDY5MDcyOTI0ODEy.XoJrrA.smSzzWsf4sJBSRtUyB185pJuQGI');
