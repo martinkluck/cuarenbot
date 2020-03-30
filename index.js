@@ -53,7 +53,7 @@ client.on('message', async message => {
         await request(options, (err, response, body) => {
             if(!err && response.statusCode == 200){                
                 let result = JSON.parse(body);
-                console.log(result);
+                // console.log(result);
                 const embed = new MessageEmbed()
                 .setColor(0xff0000)
                 .setTitle(`Tiempo en ${result.name}`)
