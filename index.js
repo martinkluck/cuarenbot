@@ -12,7 +12,7 @@ app.use(express.urlencoded())
 app.get("/", (req,res) => {
     res.send(" Discord Coronabot")
 })
-app.listen(80,()=>{
+app.listen(8000,()=>{
     console.log("Servidor web levantado")
 })
 
