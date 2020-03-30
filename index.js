@@ -1,6 +1,3 @@
-const request = require('request');
-const path = require('path');
-const http = require('http');
 const express = require('express');
 
 const dotenv = require('dotenv');
@@ -57,7 +54,7 @@ client.on('message', async message => {
     }
     if(message.content.includes('!tiempo')){
         let city = message.content.split('!tiempo ')[1];
-        let options = {
+        /* let options = {
             url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=0ce46f59c8c79704a018239066279614`,
             method: 'GET'
         }
@@ -77,7 +74,22 @@ client.on('message', async message => {
                 .addField('Humedad', result.main.humidity + '%');
                 message.channel.send(embed);
             }
-        });
+        }); */
+        axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=0ce46f59c8c79704a018239066279614`)
+        .then(response => {
+            let result = response.data;
+            // console.log(result);
+            const embed = new MessageEmbed()
+            .setColor(0xff0000)
+            .setTitle(`Tiempo en ${result.name}`)
+            .addField('Temperatura', result.main.temp + '°')
+            .addField('RealFeel', result.main.feels_like + '°')
+            .addField('Min', result.main.temp_min + '°')
+            .addField('Max', result.main.temp_max + '°')
+            .addField('Precion', result.main.pressure + ' hPa')
+            .addField('Humedad', result.main.humidity + '%');
+            message.channel.send(embed);
+        });  
     }
     if(message.content.includes('!starwars')){
         let faction = message.content.split('!starwars ')[1] && message.content.split('!starwars ')[1].includes('Jedi') ? 0 : 1
