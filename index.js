@@ -1,27 +1,24 @@
 
+const debug_express = require('debug')('express');
+const debug_discord = require('debug')('discord');
 const express = require('express');
+const app = express();
 
-const dotenv = require('dotenv');
-dotenv.config();
-
-const app = express()
-
-app.use(express.json())
-app.use(express.urlencoded())
+const { port, bot_token } = require('./config');
 
 app.get("/", (req,res) => {
-    res.send(" Discord Coronabot")
+    res.send("Discord Coronabot")
 })
-app.listen(8000,()=>{
-    console.log("Servidor web levantado")
+app.listen(port,()=>{
+    debug_express("Servidor web levantado en puerto: ", port)
 })
 
 const axios = require('axios');
-const { Client, MessageEmbed, BroadcastDispatcher} = require('discord.js');
+const { Client, MessageEmbed } = require('discord.js');
 const client = new Client();
 
 client.on('ready', () => {
-    console.log(`Bot is ready as ${client.user.tag}`);
+    debug_discord(`Bot is ready as ${client.user.tag}`);
     // client.user.setStatus('dnd');
     // console.log(client.user.presence.status);
 
@@ -51,31 +48,10 @@ client.on('message', async message => {
         const fetched = await message.channel.messages.fetch({limit: 100});
         // console.log(fetched);
         message.channel.bulkDelete(fetched);
-        console.log('Messages cleaned');
+        debug_discord('Messages cleaned');
     }
     if(message.content.includes('!tiempo')){
         let city = message.content.split('!tiempo ')[1];
-        /* let options = {
-            url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=0ce46f59c8c79704a018239066279614`,
-            method: 'GET'
-        }
-        
-        await request(options, (err, response, body) => {
-            if(!err && response.statusCode == 200){                
-                let result = JSON.parse(body);
-                // console.log(result);
-                const embed = new MessageEmbed()
-                .setColor(0xff0000)
-                .setTitle(`Tiempo en ${result.name}`)
-                .addField('Temperatura', result.main.temp + '°')
-                .addField('RealFeel', result.main.feels_like + '°')
-                .addField('Min', result.main.temp_min + '°')
-                .addField('Max', result.main.temp_max + '°')
-                .addField('Precion', result.main.pressure + ' hPa')
-                .addField('Humedad', result.main.humidity + '%');
-                message.channel.send(embed);
-            }
-        }); */
         axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=0ce46f59c8c79704a018239066279614`)
         .then(response => {
             let result = response.data;
@@ -133,4 +109,4 @@ client.on('message', async message => {
     }
 })
 
-client.login(process.env.BOT_TOKEN);
+client.login(bot_token);
