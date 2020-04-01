@@ -12,7 +12,11 @@ module.exports = {
     name: '!fortuna',
     description: 'Fortuna!',
     async execute(msg, args) {
-        let url = "http://yerkee.com/api/fortune";
+        if(args.join(' ') === 'categories'){
+            msg.channel.send('Valid categories are: all, bible, computers, cookie, definitions, miscellaneous, people, platitudes, politics, science, and wisdom.');
+            return
+        }
+        let url = "http://yerkee.com/api/fortune/" + args.join(' ');
         await axios.get(url)
         .then(async response => {
             getTranslate(response.data.fortune).then(res => {
