@@ -23,7 +23,8 @@
   "keywords": [
     "node",
     "heroku",
-    "express"
+    "express",
+    "discord.js"
   ],
   "author": "Martin Kluck",
   "license": "ISC"
