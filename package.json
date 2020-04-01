@@ -24,7 +24,8 @@
     "node",
     "heroku",
     "express",
-    "discord.js"
+    "discord.js",
+    "axios"
   ],
   "author": "Martin Kluck",
   "license": "ISC"
