@@ -7,4 +7,6 @@ module.exports = {
     Chiste: require('./chiste'),
     Bitcoin: require('./bitcoin'),
     Fortune: require('./fortune'),
+    Opensubtitles: require('./opensubtitles'),
+    Feriados: require('./feriados'),
 };
