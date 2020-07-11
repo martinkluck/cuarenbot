@@ -1,6 +1,6 @@
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+const functions = require("firebase-functions");
+// dotenv.config();
 module.exports = {
-  port: process.env.PORT,
-  bot_token: process.env.BOT_TOKEN
+  bot_token: functions.config().discord.bot_id
 };
