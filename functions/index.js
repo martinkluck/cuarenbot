@@ -63,7 +63,7 @@ app.get("/api/read", (req, res) => {
     try {
       let query = db.collection("items");
       let response = [];
-      await query.get().then((querySnapshot) => {
+      await query.get().then(querySnapshot => {
         let docs = querySnapshot.docs;
         for (let doc of docs) {
           const selectedItem = {
@@ -88,7 +88,7 @@ app.put("/api/update/:item_id", (req, res) => {
     try {
       const document = db.collection("items").doc(req.params.item_id);
       await document.update({
-        item: req.body.item,
+        item: req.body.item
       });
       return res.status(200).send();
     } catch (error) {
@@ -125,11 +125,11 @@ bot.on("ready", () => {
   console.info(`Logged in as ${bot.user.tag}!`);
 });
 
-Object.keys(botCommands).map((key) => {
+Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
 });
 
-bot.on("message", (msg) => {
+bot.on("message", msg => {
   const args = msg.content.split(/ +/);
   const command = args.shift().toLowerCase();
   console.info(`Called command: ${command}`);

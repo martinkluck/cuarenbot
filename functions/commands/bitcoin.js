@@ -1,11 +1,14 @@
-const axios = require('axios');
+const axios = require("axios");
 module.exports = {
-    name: '!bitcoin',
-    description: 'Bitcoin!',
-    execute(msg, args) {
-        axios.get(`https://api.coindesk.com/v1/bpi/currentprice.json`)
-        .then(response => {
-            msg.reply("U$S " + response.data.bpi.USD.rate_float.toFixed(2));
-        });
-    },
+  name: "!bitcoin",
+  description: "Bitcoin!",
+  execute(msg, args) {
+    axios
+      .get(`https://api.coindesk.com/v1/bpi/currentprice.json`)
+      .then(response => {
+        msg.reply("U$S " + response.data.bpi.USD.rate_float.toFixed(2));
+        return null;
+      })
+      .catch(error => console.log(error));
+  }
 };
