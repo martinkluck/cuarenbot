@@ -53,7 +53,7 @@ module.exports = {
       .get(getURL(year))
       .then(({ data }) => setNext(data))
       .then((result) => {
-        /* const embed = new MessageEmbed()
+        const embed = new MessageEmbed()
           .setColor(0x5b802e)
           .setTitle("Próximo feriado")
           .addField("Motivo", result.motivo)
@@ -63,16 +63,7 @@ module.exports = {
               months[result.mes - 1]
             }`
           )
-          .addField("Tipo", result.tipo.toUpperCase()); */
-        const embed =
-          "Próximo feriado: \n" +
-          result.motivo +
-          "\n" +
-          `${dayOfWeek(result.dia, result.mes - 1, year)} ${result.dia} | ${
-            months[result.mes - 1]
-          }` +
-          "\n" +
-          result.tipo.toUpperCase();
+          .addField("Tipo", result.tipo.toUpperCase());
         msg.channel.send(embed);
         return null;
       })
