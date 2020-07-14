@@ -4,8 +4,8 @@
   "description": "Simple and modulating discord bot",
   "scripts": {
     "lint": "eslint .",
-    "serve": "node index.js",
-    "start": "npm run serve"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "engines": {
     "node": "14"
